@@ -11,7 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm run build
+      # Paso para configurar Node.js, asegúrate de usar la versión que necesites
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Usa la versión de Node que sea compatible con tu proyecto
+      # Paso para instalar dependencias
+      - name: Install Dependencies
+        run: npm install
+      # Ahora puedes construir tu proyecto sin problemas
+      - name: Build
+        run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
